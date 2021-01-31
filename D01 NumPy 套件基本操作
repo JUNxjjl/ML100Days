@@ -10,3 +10,17 @@ np.arange(0,21,2)
 
 #3.呈1題，將數列取出3的倍數。
 np.arange(0,21,3)
+
+
+
+##Ans1
+a = np.arange(0,21)
+a
+
+#Ans2
+even = a[::2]
+even
+
+#Ans3
+threex = a[::3]
+threex
