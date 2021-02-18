@@ -25,7 +25,7 @@ print(np.sum(A1))
 # 2.是否全班同學最高分都是國文?
 A2_1 = np.greater(chinese_score, english_score)
 A2_2 = np.greater(chinese_score, math_score)
-print(np.logical_and(A2_1, A2_2).any())
+print(np.logical_and(A2_1, A2_2).all())
 
 
 
