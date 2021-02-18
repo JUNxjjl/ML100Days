@@ -16,13 +16,16 @@ english_score = np.array([55,89,76,65,48,70])
 math_score = np.array([60,85,60,68,55,60])
 chinese_score = np.array([65,90,82,72,66,77])
 
-np.greater(english_score, math_score)
+A1 = np.greater(english_score, math_score)
+print(np.sum(A1))
 
 >> 3 個 
 
 
 # 2.是否全班同學最高分都是國文?
-
+A2_1 = np.greater(chinese_score, english_score)
+A2_2 = np.greater(chinese_score, math_score)
+print(np.logical_and(A2_1, A2_2).any())
 
 
 
