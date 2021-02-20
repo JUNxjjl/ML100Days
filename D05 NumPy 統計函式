@@ -1,0 +1,45 @@
+
+import numpy as np
+
+題目:
+english_score = np.array([55,89,76,65,48,70])
+math_score = np.array([60,85,60,68,np.nan,60])
+chinese_score = np.array([65,90,82,72,66,77])
+上3列共六位同學的英文、數學、國文成績，第一個元素代表第一位同學，舉例第一位同學英文55分、數學60分、國文65分，今天第五位同學因某原因沒來考試，導致數學成績缺值，運用上列數據回答下列問題。
+
+#1. 請計算各科成績平均、最大值、最小值、標準差，其中數學缺一筆資料可忽略?
+English
+e_mean = np.nanmean(english_score)
+e_max = np.nanmax(english_score)
+e_min = np.nanmin(english_score)
+e_sdt = np.std(english_score)
+
+Math
+m_mean = np.nanmean(math_score)
+m_max = np.nanmax(math_score)
+m_min = np.nanmin(math_score)
+m_sdt = np.std(math_score)
+
+Chinese
+c_mean = np.nanmean(chinese_score)
+c_max = np.nanmax(chinese_score)
+c_min = np.nanmin(chinese_score)
+c_sdt = np.std(chinese_score)
+
+#2. 第五位同學補考數學後成績為55，請計算補考後數學成績平均、最大值、最小值、標準差?
+
+math_score[5] = 55
+m_mean = np.nanmean(math_score)
+m_max = np.nanmax(math_score)
+m_min = np.nanmin(math_score)
+m_sdt = np.std(math_score)
+
+#3. 用補考後資料找出與國文成績相關係數最高的學科?
+
+np.corrcoef(chinese_score, math_score)
+np.corrcoef(chinese_score, english_score)
+
+>> English
+
+
+
