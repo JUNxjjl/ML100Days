@@ -13,18 +13,21 @@ e_mean = np.nanmean(english_score)
 e_max = np.nanmax(english_score)
 e_min = np.nanmin(english_score)
 e_sdt = np.std(english_score)
+print("English: ",e_mean,e_max,e_min,e_sdt)
 
 Math
 m_mean = np.nanmean(math_score)
 m_max = np.nanmax(math_score)
 m_min = np.nanmin(math_score)
 m_sdt = np.std(math_score)
+print("Math: ",m_mean,m_max,m_min,m_sdt)
 
 Chinese
 c_mean = np.nanmean(chinese_score)
 c_max = np.nanmax(chinese_score)
 c_min = np.nanmin(chinese_score)
 c_sdt = np.std(chinese_score)
+print("Chinese: ",c_mean,c_max,c_min,c_sdt)
 
 #2. 第五位同學補考數學後成績為55，請計算補考後數學成績平均、最大值、最小值、標準差?
 
@@ -33,11 +36,12 @@ m_mean = np.nanmean(math_score)
 m_max = np.nanmax(math_score)
 m_min = np.nanmin(math_score)
 m_sdt = np.std(math_score)
+print("Math: ",m_mean,m_max,m_min,m_sdt)
 
 #3. 用補考後資料找出與國文成績相關係數最高的學科?
 
-np.corrcoef(chinese_score, math_score)
-np.corrcoef(chinese_score, english_score)
+print("Chinese: Math", np.corrcoef(chinese_score, math_score))
+print("Chinese: English", np.corrcoef(chinese_score, english_score))
 
 >> English
 
