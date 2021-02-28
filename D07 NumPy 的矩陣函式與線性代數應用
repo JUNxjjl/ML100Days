@@ -12,7 +12,7 @@ array1 = np.array([[10, 8], [3, 5]])
 array1 = np.array([[10, 8], [3, 5]])
 
 T = np.linalg.inv(array1)
-T @ array1
+np.dot(T, array1)
 
 >>Yes
 
@@ -20,6 +20,8 @@ T @ array1
 # 2. 運用上列array計算特徵值、特徵向量?
 
 w, v = np.linalg.eig(A)
+print(w)
+print(v)
 
 w >> array([-2.82283424,  3.15857106, 11.66426319])
 v >> array([[ 0.40317294,  0.80817893,  0.3874861 ],
@@ -30,6 +32,9 @@ v >> array([[ 0.40317294,  0.80817893,  0.3874861 ],
 # 3. 運用上列array計算SVD?
 
 u, s, vh = np.linalg.svd(A)
+print(u)
+print(s)
+print(vh)
 
 u >> array([[-0.37427643,  0.44985304,  0.8108942 ],
             [-0.6808123 ,  0.46041771, -0.56965792],
