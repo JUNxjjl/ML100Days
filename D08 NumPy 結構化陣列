@@ -29,4 +29,8 @@ print(np.mean(array['weight']))
 # 3. 呈上題，進一步算出男生(sex欄位是boy)平均體重
 # 3. 呈上題，進一步算出女生(sex欄位是girl)平均體重
 
+np.mean(array[array['sex']=='boy']['weight'])
+np.mean(array[array['sex']=='girl']['weight'])
+
+
 
