@@ -10,3 +10,7 @@ print(q_df)
 q_df.fillna('other')
 
 # 更進一步將字串做編碼。 此時用什麼方式做編碼比較適合?為什麼?
+# 無連續性～
+pf = pd.get_dummies(q_df[['Profession']])
+q_df = pd.concat([q_df, pf], axis=1)
+q_df
