@@ -7,10 +7,14 @@ series
 
 # 1. 將所有轉為周資料
 
+series.to_period('W')
+
 w_index = pd.date_range('1/1/2019', periods=20, freq='W')
 series = pd.Series(range(20), index=w_index)
 series
 
 # 2. 將周資料的值取平均
+
+series.resample('W').mean()
 
 series.mean()
