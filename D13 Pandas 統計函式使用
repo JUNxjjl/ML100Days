@@ -20,6 +20,7 @@ score_df.mean(axis=1)
 >> 56.333333
 
 score_df[score_df.index == 6].values.mean()
+print(score_df[5:6].mean(axis=1))
 
 # 2. 6號學生3科平均分數是否有贏過班上一半的同學
 
