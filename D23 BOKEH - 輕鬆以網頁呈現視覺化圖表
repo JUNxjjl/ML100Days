@@ -1,0 +1,35 @@
+
+import bokeh.io
+from bokeh.resources import INLINE
+from bokeh.plotting import figure, output_file, show, output_notebook
+from bokeh.sampledata.stocks import AAPL, GOOG, IBM, MSFT
+import pandas as pd
+
+bokeh.io.reset_output()
+bokeh.io.output_notebook(INLINE)
+
+# 1. test1
+
+output_file("test1.html")
+
+fruits = ['Apples', 'Pears', 'Nectarines', 'Plums', 'Grapes', 'Strawberries']
+counts = [5, 3, 4, 2, 4, 6]
+
+p = figure(x_range = fruits, title = "Fruit Counts", toolbar_location = None, tools = "")
+p.vbar(x = fruits, top = counts, width=0.5)
+p.y_range.start = 0
+show(p)
+
+# 2. test2
+
+output_file("test2.html")
+
+fruits = ['Apples', 'Pears', 'Nectarines', 'Plums', 'Grapes', 'Strawberries']
+counts = [5, 3, 4, 2, 4, 6]
+
+sorted_fruits = sorted(fruits, key = lambda x: counts[fruits.index(x)])
+
+p = figure(x_range = sorted_fruits, title = "Fruit Counts", toolbar_location = None, tools = "")
+p.vbar(x = fruits, top = counts, width = 0.5)
+p.y_range.start = 0
+show(p)
