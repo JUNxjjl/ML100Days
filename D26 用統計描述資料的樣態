@@ -1,0 +1,25 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+
+boys = [164, 176, 169, 169, 165, 175, 159, 151, 144, 160, 183, 165, 156, 170, 164, 173, 165, 163, 177, 171]
+girls = [169, 183, 170, 168, 182, 170, 173, 185, 151, 156, 162, 169, 162, 181, 159, 154, 167, 175, 170, 160]
+
+# Q1:試著用今天所教的內容，如何描述這兩組資料的樣態?
+
+print(statistics.mean(boys), statistics.mean(girls))
+
+
+# Q2: 請問男生和女生在平均身高上誰比較高? 
+
+print(statistics.mean(boys), statistics.mean(girls))
+>> girls
+
+# Q3:請問第二題的答案和日常生活中觀察的一致嗎? 如果不一致，你覺得原因可能為何? 
+
+取樣
