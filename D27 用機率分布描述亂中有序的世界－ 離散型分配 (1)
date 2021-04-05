@@ -1,0 +1,16 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+
+# 1. 丟一個銅板，丟了100次，出現正面 50 次的機率有多大?
+
+p = 0.5
+r = np.arange(0,2)
+
+X = stats.bernoulli.rvs(p, size = 100)
+plt.hist(X)
+plt.show()
