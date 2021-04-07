@@ -1,0 +1,27 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+
+# 1. 大樂透的頭獎，你必須從49個挑選出 6 個號碼，且這六個號碼與頭獎的六個號碼一致，頭獎的機率是屬於哪一種分配?
+
+>> Hypergeometric Distribution
+
+# 2. 計算大樂透的中頭獎機率?
+
+N = 49
+K = 49
+n = 6
+
+r = np.arange(0, min(n+1,K+1)) 
+print(r)
+
+probs = stats.hypergeom.pmf(r, N, K, n)
+print(probs)
+
+# 3. 電腦簽注的中獎機率，和人腦簽注相比，哪一個機率高?
+
+>> the same
