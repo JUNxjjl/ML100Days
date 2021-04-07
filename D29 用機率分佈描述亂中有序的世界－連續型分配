@@ -11,19 +11,18 @@ import seaborn as sns
 
 mu = 0
 sigma = 1
-x = np.linspace(-10,10,500)
 
-cumsum_probs = stats.uniform.cdf(x, mu, sigma)
-plt.plot(x, cumsum_probs, "b-", linewidth=2)
-plt.show()
-print(cumsum_probs)
-
+Q1 = stats.norm.cdf(1, mu, sigma)
+print(Q1)
 
 # Q2：計算標準常態分配，大於1，小於 -1 的機率有多大？
 
-
-cumsum_probs = stats.uniform.cdf(1, mu, sigma)
-print(cumsum_probs)
+Q2_1 = stats.norm.cdf(1, mu, sigma)
+Q2_2 = stats.norm.cdf(-1, mu, sigma)
+print(1-(Q2_1-Q2_2))
 
 # Q3：X~N(2,4),x 服從常態分配，平均數為2,變異數為 4，計算 X小於 6 的機率有多大?
+
+Q3 = stats.norm.cdf(2, mu, sigma)
+print(Q3)
 
