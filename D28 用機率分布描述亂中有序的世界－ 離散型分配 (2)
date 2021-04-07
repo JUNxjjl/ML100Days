@@ -13,13 +13,10 @@ import statistics
 # 2. 計算大樂透的中頭獎機率?
 
 N = 49
-K = 49
+K = 6
 n = 6
 
-r = np.arange(0, min(n+1,K+1)) 
-print(r)
-
-probs = stats.hypergeom.pmf(r, N, K, n)
+probs = stats.hypergeom.pmf(6, N, K, n)
 print(probs)
 
 # 3. 電腦簽注的中獎機率，和人腦簽注相比，哪一個機率高?
