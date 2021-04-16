@@ -1,0 +1,18 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+import statsmodels.stats.proportion
+
+# Q1 :某工廠想知道兩條不同的生產線的產品不良率是否有所不同，由兩條生產線中各抽取 300 個樣本，
+#     第一組有 75 個不良品，第二組有 30 個不良品，我們可以宣稱生產線所生產出的產品不良率不相同? (以 0.05 為顯著水準)?
+
+A = [75, 30]
+B = [300,300]
+statsmodels.stats.proportion.proportions_ztest(A, B, alternative='smaller')
+
+
