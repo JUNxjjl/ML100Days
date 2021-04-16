@@ -13,6 +13,6 @@ import statsmodels.stats.proportion
 
 A = [75, 30]
 B = [300,300]
-statsmodels.stats.proportion.proportions_ztest(A, B, alternative='smaller')
+statsmodels.stats.proportion.proportions_ztest(A, B, alternative='two-sided')
 
 
