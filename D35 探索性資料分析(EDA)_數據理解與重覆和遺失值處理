@@ -19,20 +19,35 @@ df_train = pd.read_csv("Titanic_train.csv")
 df_test = pd.read_csv("Titanic_test.csv")
 
 # Q1：觀察測試(test) 資料集和訓練(Train) 資料集的變數的差異性？
+
 df_train.info()
 df_test.info()
+
+print(df_test.columns)
+print(df_train.columns)
+
+>> df_test 沒有 'Survived'
 
 # Q2：測試資料集是否有遺失值？
 print(df_train.isnull().any().sum())
 print(df_test.isnull().any().sum())
 
-# Q3：從合併資料選取一個變數，嘗試去做各種不同遺失值的處理，並透過圖形或數值來做輔助判斷，補值前與後的差異，你覺得以這個變數而言，試著說明每一個方法的差異。 
-df_train['Age']=df_train['Age'].fillna(df_train['Age'].mean())
-df_train['Age']=df_train['Age'].fillna(method = 'bfill')
-df_train['Age']=df_train['Age'].fillna(method = 'pad')
-print(df_train['Age'].mean())
-print(df_train['Age'].std())
-df_train[df_train['Age'].isnull().values==True]
+>> 有
 
-g = sns.FacetGrid(df_train, col = 'Survived')
-g.map(sns.distplot, 'Age', kde = False)
+# Q3：從合併資料選取一個變數，嘗試去做各種不同遺失值的處理，並透過圖形或數值來做輔助判斷，補值前與後的差異，你覺得以這個變數而言，試著說明每一個方法的差異。 
+
+data = df_train.append(df_test)
+data.info()
+data.head(10)
+print(data.isnull().any().sum())
+
+data['Fare'] = data['Fare'].apply(lambda x : str(x)[0] if not pd.isnull(x) else 'NO')
+data['Fare'].unique()
+data['Cabin'] = data['Cabin'].apply(lambda x : str(x)[0] if not pd.isnull(x) else 'NO')
+data['Cabin'].unique()
+
+sns.countplot(data['Fare'], hue = data['Survived'])
+
+data[['Fare','Survived']].groupby(['Fare'],as_index=False).mean().sort_values(by = 'Survived', ascending = False)
+
+
