@@ -1,0 +1,43 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+from IPython.display import display
+
+df_train = pd.read_csv("Titanic_train.csv")
+
+missing_vals = df_train.isnull().sum()/len(df_train)
+missing_vals.sort_values(ascending = False)
+missing_vals = pd.DataFrame(missing_vals, columns=['missing_rate'])
+print(missing_vals)
+
+missing_index = df_train.isnull()
+display(df_train[missing_index.values == True])
+
+# step1: 觀察 Age 和 Pclass 與 Sex 是否有關連性?
+g = sns.regplot(x = 'Age', y = 'Pclass', color = 'g', data = df_train)
+
+le = preprocessing.LabelEncoder()
+df_train['Sex'] = le.fit_transform(df_train['Sex'])
+display(df_train)
+g = sns.regplot(x = 'Age', y = 'Sex', color = 'b', data = df_train)
+
+# step2: 如果有關連性，運用 KNN ，取出 Age 、 Pclass、 Sex的資料，以 Sex 與 Pclass 補 Age 遺失值。
+
+from sklearn import preprocessing
+
+le = preprocessing.LabelEncoder()
+df_train['Pclass'] = le.fit_transform(df_train['Pclass'])
+df_train['Sex'] = le.fit_transform(df_train['Sex'])
+
+value_neighbors = 1
+from sklearn.impute import KNNImputer
+impiuter = KNNImputer(n_neighbors = value_neighbors)
+df_filled = pd.DataFrame(imputer.fit_transform(data))
+display(data[missing_index.values == True])
+display(df_filled[missing_index.values == True])
+
