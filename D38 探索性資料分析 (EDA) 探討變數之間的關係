@@ -1,0 +1,39 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+from IPython.display import display
+
+import pingouin as pg
+import researchpy
+%matplotlib inline
+
+df_train = pd.read_csv("Titanic_train.csv")
+print(df_train.info())
+
+# Q1: 透過數值法計算 Age 和 Survived 是否有相關性?
+
+print(df_train['Age'].isnull().any())
+print(df_train['Survived'].isnull().any())
+df_train['Age']=df_train['Age'].fillna(method='bfill')
+coor, _ = stats.pearsonr(df_train['Age'], df_train['Survived'])
+coor
+
+# Q2:透過數值法計算 Sex 和 Survived 是否有相關性?
+
+print(df_train['Sex'].isnull().any())
+
+corr2, res = researchpy.crosstab(df_train['Sex'], df_train['Survived'], test = 'chi-square')
+print(res)
+
+# Q3: 透過數值法計算 Age 和 Fare 是否有相關性?
+
+print(df_train['Fare'].isnull().any())
+
+corr3, _ = stats.pearsonr(df_train['Age'], df_train['Fare'])
+corr3
+
