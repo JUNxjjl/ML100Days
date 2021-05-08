@@ -43,17 +43,84 @@ display(d_data.head(5))
 
 # Q2: 添加女性和男性，產生一個新的變數(Age_above65_female)，女性或Age>=65為'Y'，其餘為'N'。
 
-def age_af(x):
-    if(x == 'female'):
-        if(data['Age'] >=65):
+def age_af(row):
+    if(row.Sex == 'female'):
+        return('Y')
+    else:
+        if(row.Age>=65):
             return('Y')
         else:
             return('N')
-    else:
-        return('N')
-d_data['Age_above65_F'] = data['Sex'].apply(age_af)
+d_data['Age_above65_F'] = d_data[['Age','Sex']].apply(age_af, axis = 1)
+display(d_data)
 
 
 # Q3: 透過昨天課程的內容，驗證產生的兩個新變數，哪一個和目標變數(Survived_cate)的相關性較高?
 
+contTable = pd.crosstab(d_data["Age_above65"], d_data['Survived_cate'])
+contTable
+df = min(contTable.shape[0], contTable.shape[1]) - 1
+df
+crosstab, res = researchpy.crosstab(d_data['Survived_cate'], d_data['Age_above65'], test = 'chi-square')
+print(res)
 
+def judgment_CramerV(df, V):
+    if df == 1:
+        if V < 0.10:
+            qual = 'negligible'
+        elif V < 0.30:
+            qual = 'small'
+        elif V < 0.50:
+            qual = 'medium'
+        else:
+            qual = 'large'
+    elif df == 2:
+        if V < 0.07:
+            qual = 'negligible'
+        elif V < 0.21:
+            qual = 'small'
+        elif V < 0.35:
+            qual = 'medium'
+        else:
+            qual = 'large'
+    elif df == 3:
+        if V < 0.06:
+            qual = 'negligible'
+        elif V < 0.17:
+            qual = 'small'
+        elif V < 0.29:
+            qual = 'medium'
+        else:
+            qual = 'large'
+    elif df == 4:
+        if V < 0.05:
+            qual = 'negligible'
+        elif V < 0.15:
+            qual = 'small'
+        elif V < 0.25:
+            qual = 'medium'
+        else:
+            qual = 'large'
+    else:
+        if V < 0.05:
+            qual = 'negligible'
+        elif V < 0.13:
+            qual = 'small'
+        elif V < 0.22:
+            qual = 'medium'
+        else:
+            qual = 'large'
+    return(qual)
+judgment_CramerV(df, res.loc[2, 'results'])
+            
+
+contTable = pd.crosstab(d_data['Age_above65_F'], d_data['Survived_cate'])
+contTable
+
+df = min(contTable.shape[0], contTable.shape[1]) - 1
+df
+crosstab, res = researchpy.crosstab(d_data['Survived_cate'], d_data['Age_above65_F'], test = 'chi-square')
+print(res)
+judgment_CramerV(df, res.loc[2, 'results'])
+
+>> age_above65_famale
