@@ -1,0 +1,59 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+from IPython.display import display
+import sklearn
+print(sklearn.__version__)
+
+%matplotlib inline
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('max_colwidth', 100)
+
+import pingouin as pg
+import researchpy
+
+df_train = pd.read_csv("Titanic_train.csv")
+print(df_train.info())
+
+df_train['Survived_cate'] = df_train['Survived']
+df_train['Survived_cate'] = df_train['Survived_cate'].astype('object')
+print(df_train.info())
+
+d_data = df_train[['Age', 'Survived_cate', 'Sex']].dropna()
+display(d_data)
+
+
+# Q1: 產生一個新的變數(Age_above65_) Age>=65為 'Y'，其餘為'N'。
+
+def age_a(x):
+    if(x>=65):
+        return('Y')
+    else:
+        return('N')
+d_data['Age_above65'] = d_data['Age'].apply(age_a)
+display(d_data.head(5))
+
+
+# Q2: 添加女性和男性，產生一個新的變數(Age_above65_female)，女性或Age>=65為'Y'，其餘為'N'。
+
+def age_af(x):
+    if(x == 'female'):
+        if(data['Age'] >=65):
+            return('Y')
+        else:
+            return('N')
+    else:
+        return('N')
+d_data['Age_above65_F'] = data['Sex'].apply(age_af)
+
+
+# Q3: 透過昨天課程的內容，驗證產生的兩個新變數，哪一個和目標變數(Survived_cate)的相關性較高?
+
+
