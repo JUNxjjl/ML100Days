@@ -42,23 +42,28 @@ for dtype, feature in zip(d_data.dtypes, d_data.columns):
         cat_features.append(feature)
 print(f'{len(cat_features)} category Features : {cat_features}\n')
 
+
 # Q1: 目標變數為 Survived，試著用今天教授的包裝法，搭配課程所教的 SVC，試著排出其餘特徵的重要性!
 #離散要轉換成數值，['Sex', 'Embarked']
+
+x = d_data[['Pclass', 'Age', 'SibSp', 'Parch', 'Fare','Sex', 'Embarked']]
+display(x)
+display(y)
 
 Sex_mapping = {'male' : 1, 'female' : 0}
 d_data['Sex1'] = d_data['Sex'].map(Sex_mapping)
 
-Embarked_mapping = {'C' : 1, 'S' : 0}
+Embarked_mapping = {'C' : 1, 'S' : 2, 'Q' : 3}
 d_data['Embarked1'] = d_data['Embarked'].map(Embarked_mapping)
 
-x = d_data[['Sex1', 'Cabin', 'Embarked1']]
-display(x)
+x = d_data[['Pclass', 'Age', 'SibSp', 'Parch', 'Fare','Sex1', 'Embarked1']]
+x = x.dropna()
+display(x.info())
 
 #執行 包裝法
-y = d_data['Survived_cate']
 
 estimator = SVC(kernel="linear")
-selector = RFE(estimator, n_features_to_select = 2, step = 1)
+selector = RFE(estimator, n_features_to_select = 1, step = 1)
 selector = selector.fit(x, y)
 print(selector.support_)
 
