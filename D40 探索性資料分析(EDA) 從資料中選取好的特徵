@@ -1,0 +1,70 @@
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy import stats
+import math
+import statistics
+import seaborn as sns
+from IPython.display import display
+import sklearn
+print(sklearn.__version__)
+print(pd.__version__)
+%matplotlib inline
+
+from sklearn.feature_selection import VarianceThreshold
+from sklearn import preprocessing
+from sklearn.datasets import make_friedman1
+from sklearn.feature_selection import RFE
+from sklearn.svm import SVC
+
+df_train = pd.read_csv("Titanic_train.csv")
+print(df_train.info())
+
+df_train['Survived_cate'] = df_train['Survived']
+df_train['Survived_cate'] = df_train['Survived_cate'].astype('object')
+print(df_train.info())
+
+d_data = df_train.dropna()
+d_data = d_data.drop(['Name', 'Ticket', 'PassengerId'], axis = 1)
+display(d_data)
+print(d_data.shape)
+
+num_features = []
+for dtype, feature in zip(d_data.dtypes, d_data.columns):
+    if dtype == 'float64' or dtype == 'int64':
+        num_features.append(feature)
+print(f'{len(num_features)} Numeric Features : {num_features}\n')
+
+cat_features = []
+for dtype, feature in zip(d_data.dtypes, d_data.columns):
+    if dtype == 'object':
+        cat_features.append(feature)
+print(f'{len(cat_features)} category Features : {cat_features}\n')
+
+# Q1: 目標變數為 Survived，試著用今天教授的包裝法，搭配課程所教的 SVC，試著排出其餘特徵的重要性!
+#離散要轉換成數值，['Sex', 'Embarked']
+
+Sex_mapping = {'male' : 1, 'female' : 0}
+d_data['Sex1'] = d_data['Sex'].map(Sex_mapping)
+
+Embarked_mapping = {'C' : 1, 'S' : 0}
+d_data['Embarked1'] = d_data['Embarked'].map(Embarked_mapping)
+
+x = d_data[['Sex1', 'Cabin', 'Embarked1']]
+display(x)
+
+#執行 包裝法
+y = d_data['Survived_cate']
+
+estimator = SVC(kernel="linear")
+selector = RFE(estimator, n_features_to_select = 2, step = 1)
+selector = selector.fit(x, y)
+print(selector.support_)
+
+ranking = selector.ranking_
+print(ranking)
+
+rfe_feature = x.loc[:,selector.support_].columns.tolist()
+print(rfe_feature)
+
