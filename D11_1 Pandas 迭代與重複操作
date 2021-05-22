@@ -14,10 +14,11 @@ labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 df = pd.DataFrame(data, index=labels)
 df
 
-df.iloc[[3,4,8]]
+df.loc[df.index[[3,4,8]], ['animal', 'age']]
 
 # 2. 請將 dataFrame 所有字串都變成是大寫開頭。
 
 df = pd.DataFrame([['tom', 'mark', 'mary'],['bob', 'alice', 'john']])
 df
 
+df.applymap(lambda x: x.title())
