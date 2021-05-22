@@ -18,11 +18,13 @@ print(df2)
 #    依照 index 索引做合併
 
 pd.merge(df1, df2, on = 'fruit')
-pd.concat(df1, df2)
+df1.join(df2)
 
 # 2. [簡答題] 承上題，請問為什麼依照 merge 合併後有些資料不見了？
 
-
+>> merge 要並存才會合併
 
 # 3. [簡答題] 承上題，請問為什麼依照 index 合併會發生錯誤？請用程式解決
+
+df1.join(df2, lsuffix='_df1', rsuffix='_df2')
 
